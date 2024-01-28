@@ -7,12 +7,12 @@ export type registryJson = {
   versions: string[];
   registry: {
     version: string;
-    changes: { component: string; path: string }[];
+    changes: string[];
   }[];
 };
 
 export type blockDependenciesJson = {
   description: string;
-  components: { block: string; dependencies: string[] }[];
-  packages: { block: string; dependencies: string[] }[];
+  components: { block: blocks | "core"; dependencies: string[] }[];
+  packages: { block: blocks; dependencies: string[] }[];
 };
