@@ -1,5 +1,5 @@
 {
-  "name": "my-package",
+  "name": "@altron/altron-cli",
   "license": "MIT",
   "description": "A cli tool for altron rich text editor.",
   "keywords": [

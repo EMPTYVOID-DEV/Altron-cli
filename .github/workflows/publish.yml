@@ -1,32 +1,41 @@
-name: Publish
-on:
-  workflow_run:
-    workflows: [CI]
-    branches: [main]
-    types: [completed]
+name: CP
 
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {} #reset
 
 jobs:
-  publish:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  release:
+    # IMPORTANT: prevent this action from running on forks
+    if: github.repository == 'EMPTYVOID-DEV/Altron-cli'
+    permissions:
+      contents: write # to create release (changesets/action)
+      pull-requests: write # to create pull request (changesets/action)
+    name: Release
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - "18.x"
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
           version: 7
-      - uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: ${{matrix.node-version}}
           cache: "pnpm"
-
       - run: pnpm install --frozen-lockfile
-      - name: Create Release Pull Request or Publish
+      - name: Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
