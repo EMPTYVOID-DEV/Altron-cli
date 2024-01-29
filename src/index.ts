@@ -12,7 +12,7 @@ import { whatNext } from "./handlers/whatNext.js";
 
 async function main() {
   welcome();
-  const usedVersion = altronCheck();
+  const usedVersion = "2.0.0";
   const { altronPath, choices } = await cli();
   const { registry, blockDependencies } = await getMetaData();
   await createAltronDir(altronPath);
@@ -20,6 +20,7 @@ async function main() {
   const paths = componentToPath(components, registry, usedVersion);
   await loadComponents(paths, altronPath);
   await installPackages(packages);
+
   whatNext();
 }
 main().catch((err) => {

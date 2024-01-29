@@ -18,9 +18,11 @@ export function componentToPath(
   const paths: string[] = [];
   for (let component of components) {
     let currentPath = getPath(component, validRegistry);
-    paths.push(currentPath);
+    if (currentPath != "") {
+      paths.push(currentPath);
+    }
   }
-  logger.info("The url of components were extracted.");
+  logger.info("The path of components were extracted.");
   return paths;
 }
 
@@ -38,5 +40,8 @@ function getPath(
       }
     }
   }
+  logger.error(
+    `An error in the registry has been detected, we couldn't map the component ${component} to a path.`
+  );
   return "";
 }

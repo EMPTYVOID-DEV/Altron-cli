@@ -4,7 +4,7 @@ export const blocksList = [
   "image",
   "code",
   "list",
-  "checkList",
+  "checklist",
   "quote",
   "space",
   "attachment",

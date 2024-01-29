@@ -18,7 +18,7 @@ export async function installPackages(packages: string[]) {
     logger.success(
       `The packages "${packages.join(" , ")}" were installed successfully`
     );
-  } catch (error) {
+  } catch (error: any) {
     if (pkgManager != "pnpm")
       logger.error(
         `The cli got this error while installing packages ${error.message}`
