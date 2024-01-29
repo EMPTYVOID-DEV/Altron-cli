@@ -7,6 +7,7 @@ import { altronCheck } from "./handlers/altronCheck.js";
 import { componentToPath } from "./handlers/mapToPath.js";
 import { loadComponents } from "./handlers/loadComponents.js";
 import { installPackages } from "./handlers/installPackages.js";
+import { createIndex } from "./handlers/createIndex.js";
 import { logger } from "./utils/logger.js";
 import { whatNext } from "./handlers/whatNext.js";
 
@@ -17,10 +18,10 @@ async function main() {
   const { registry, blockDependencies } = await getMetaData();
   await createAltronDir(altronPath);
   const { components, packages } = getDependencies(choices, blockDependencies);
-  const paths = componentToPath(components, registry, usedVersion);
-  await loadComponents(paths, altronPath);
+  const componentPaths = componentToPath(components, registry, usedVersion);
+  await loadComponents(componentPaths, altronPath);
   await installPackages(packages);
-
+  createIndex(altronPath, componentPaths);
   whatNext();
 }
 main().catch((err) => {

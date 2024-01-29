@@ -15,9 +15,11 @@ export function componentToPath(
     .sort((a, b) => {
       return compareVersions(a.version, b.version);
     });
+  // for each component we search the registry for a path that is under the latest version
   const paths: string[] = [];
   for (let component of components) {
     let currentPath = getPath(component, validRegistry);
+    // in case the path does not exist we log an error to the user and we continue
     if (currentPath != "") {
       paths.push(currentPath);
     }
