@@ -3,10 +3,10 @@ name: CP
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions: {} #reset
