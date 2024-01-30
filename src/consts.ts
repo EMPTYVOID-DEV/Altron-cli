@@ -22,6 +22,6 @@ export const successColor = "#008000";
 export const infoColor = "#0000FF";
 
 export const rawPath =
-  "https://raw.githubusercontent.com/EMPTYVOID-DEV/Altron/dev/";
+  "https://raw.githubusercontent.com/EMPTYVOID-DEV/Altron/master/";
 
 export const workingDir = process.cwd();
