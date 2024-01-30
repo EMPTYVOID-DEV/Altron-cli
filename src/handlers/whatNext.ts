@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { logger } from "../utils/logger.js";
 
 export function whatNext() {
@@ -6,5 +5,5 @@ export function whatNext() {
   logger.info("1-Import altron inside your +page.svelte");
   logger.info("2-Import the componentMap from index.js");
   logger.info("3-Pass the map to altron");
-  console.log(chalk.rgb(236, 66, 6));
+  logger.info("happy coding");
 }
