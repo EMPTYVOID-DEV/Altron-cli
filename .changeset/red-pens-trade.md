@@ -2,4 +2,4 @@
 "@altron/altron-cli": minor
 ---
 
-first functional version
+functional version for altron-cli
