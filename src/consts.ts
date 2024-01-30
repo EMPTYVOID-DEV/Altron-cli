@@ -11,6 +11,8 @@ export const blocksList = [
   "embed",
 ] as const;
 
+export const parentDirs = ["extra", "viewBlocks", "icons", "core"];
+
 export const warnColor = "#FFD700";
 
 export const errorColor = "#FF0000";

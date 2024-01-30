@@ -1,14 +1,15 @@
-import { workingDir } from "../consts.js";
+import { parentDirs, workingDir } from "../consts.js";
 import Path from "path";
 import fsExtra from "fs-extra";
 import { logger } from "src/utils/logger.js";
 
-export function createIndex(altronPath: string, componentPaths: string[]) {
+export function createIndex(altronPath: string) {
   let importContent = "";
   let componentMap = "";
+  const existingComponents = getExistingComponents(altronPath);
   const indexPath = Path.join(workingDir, altronPath, "index.js");
   fsExtra.createFileSync(indexPath);
-  for (let componentPath of componentPaths) {
+  for (let componentPath of existingComponents) {
     importContent += `${addNewImport(componentPath)}\n`;
     componentMap += `${addComponentMap(componentPath)},\n`;
   }
@@ -17,15 +18,29 @@ export function createIndex(altronPath: string, componentPaths: string[]) {
   logger.success("The import index has been created successfully.");
 }
 
+function getExistingComponents(altronPath: string): string[] {
+  const altronAbsolutePath = Path.join(workingDir, altronPath);
+  const existingComponents: string[] = [];
+  for (const parentDir of parentDirs) {
+    let currentDirPath = Path.join(altronAbsolutePath, parentDir);
+    fsExtra
+      .readdirSync(currentDirPath)
+      .forEach((component) =>
+        existingComponents.push(`${parentDir}/${component}`)
+      );
+  }
+  return existingComponents;
+}
+
 function addNewImport(componentPath: string) {
   // parent dir is like extra-core
-  const [version, parentDir, fileName] = componentPath.split("/");
+  const [parentDir, fileName] = componentPath.split("/");
   const [componentName, extension] = fileName.split(".");
   return `import ${componentName.toUpperCase()} from "./${parentDir}/${fileName}"`;
 }
 
 function addComponentMap(componentPath: string) {
-  const [version, parentDir, fileName] = componentPath.split("/");
+  const [parentDir, fileName] = componentPath.split("/");
   const [componentName, extension] = fileName.split(".");
   return `["${componentName}",${componentName.toUpperCase()}]`;
 }

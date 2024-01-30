@@ -21,7 +21,7 @@ async function main() {
   const componentPaths = componentToPath(components, registry, usedVersion);
   await loadComponents(componentPaths, altronPath);
   await installPackages(packages);
-  createIndex(altronPath, componentPaths);
+  createIndex(altronPath);
   whatNext();
 }
 main().catch((err) => {
