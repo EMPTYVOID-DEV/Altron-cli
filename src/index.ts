@@ -13,7 +13,7 @@ import { whatNext } from "./handlers/whatNext.js";
 
 async function main() {
   welcome();
-  const usedVersion = "2.0.0";
+  const usedVersion = altronCheck();
   const { altronPath, choices } = await cli();
   const { registry, blockDependencies } = await getMetaData();
   await createAltronDir(altronPath);

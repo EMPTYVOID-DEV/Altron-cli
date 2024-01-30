@@ -15,7 +15,7 @@ export function createIndex(altronPath: string) {
   }
   let indexContent = `${importContent}\nexport const componentMap=new Map([\n${componentMap}])`;
   fsExtra.writeFileSync(indexPath, indexContent);
-  logger.success("The import index has been created successfully.");
+  logger.info("The import index has been created.");
 }
 
 function getExistingComponents(altronPath: string): string[] {
