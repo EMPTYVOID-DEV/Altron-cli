@@ -42,5 +42,5 @@ function addNewImport(componentPath: string) {
 function addComponentMap(componentPath: string) {
   const [parentDir, fileName] = componentPath.split("/");
   const [componentName, extension] = fileName.split(".");
-  return `["${componentName}",${componentName.toUpperCase()}]`;
+  return ` ["${componentName}",${componentName.toUpperCase()}]`;
 }

@@ -14,17 +14,20 @@ export async function loadComponents(paths: string[], writeLocation: string) {
         // removing the version from the path
         const pathWithoutVer = path.split("/");
         pathWithoutVer.shift();
-        writeFile(pathWithoutVer.join("/"), content, writeLocation);
+        return writeFile(pathWithoutVer.join("/"), content, writeLocation);
       })
       .then(() => {
         logger.success(`The component ${path} was loaded.`);
+      })
+      .catch(() => {
+        logger.error(`The component ${path} was not loaded`);
       });
   });
   return Promise.allSettled(fetchPromises);
 }
 
-async function writeFile(path: string, content: string, writeLocation: string) {
+function writeFile(path: string, content: string, writeLocation: string) {
   const absolutePath = Path.join(workingDir, writeLocation, path);
-  await fsExtra.createFile(absolutePath);
+  fsExtra.createFileSync(absolutePath);
   return fsExtra.writeFile(absolutePath, content);
 }

@@ -8,12 +8,13 @@ export function componentToPath(
   version: string
 ): string[] {
   // list of registry entries after 2.0.0 but still less than the version that user has
+  // sorted based on version in descending order
   const validRegistry = registry.registry
     .filter((ver) => {
       return compareVersions(ver.version, version) <= 0;
     })
     .sort((a, b) => {
-      return compareVersions(a.version, b.version);
+      return compareVersions(a.version, b.version) * -1;
     });
   // for each component we search the registry for a path that is under the latest version
   const paths: string[] = [];
