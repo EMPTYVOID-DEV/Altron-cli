@@ -1,5 +1,3 @@
-import { logger } from "../utils/logger.js";
-
 export function validatePath(path: string) {
   const regex = /^[a-zA-Z_\-0-9]+(\/[a-zA-Z_\-0-9]+)*$/;
   return (

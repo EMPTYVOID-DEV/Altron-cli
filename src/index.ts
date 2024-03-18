@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { welcome } from "./utils/welcome.js";
 import { getMetaData } from "./handlers/getMetaData.js";
 import { cli } from "./handlers/cli.js";
