@@ -1,5 +1,11 @@
 # @altron/altron-cli
 
+## 0.1.3
+
+### Patch Changes
+
+- 82bc515: adding shebang to index.ts
+
 ## 0.1.2
 
 ### Patch Changes
